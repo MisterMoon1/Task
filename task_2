@@ -1,4 +1,9 @@
+# Задача №2
+
 import socket, struct
 
 def int32_to_ip(int32):
+
+    """Преобраует 32-ух битный IPv4-адрес в строку c разделителями"""
+    
     return(socket.inet_ntoa(struct.pack('!L', int(int32))))
