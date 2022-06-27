@@ -1,0 +1,29 @@
+def bananas(s):
+    
+    """Образец для сравнения"""
+    
+    sample = 'banana'
+    
+    def inner_bananas(s, sample):
+        
+        """Внутренняя функция для проверки"""
+        
+        result = []
+
+        if sample == '':
+            result.append(''.rjust(len(s), '-'))
+            return result
+
+        string_1 = ''
+        for item in range(len(s)):
+            if sample[0] == s[item]:
+                string_1 = ''.rjust(item, '-') + s[item]
+                if s[item+1:] == '' and sample[1:] == '':
+                    result.append(string_1)
+                else:
+                    result_list = inner_bananas(s[item+1:], sample[1:])
+                    for string_2 in result_list:
+                        result.append(string_1 + string_2)
+        return(set(result))
+        
+    return(inner_bananas(s, sample))
