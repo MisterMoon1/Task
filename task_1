@@ -1,21 +1,15 @@
-# Задача №1
-
 def domain_name(url):
-
-    """Получает срез из адреса по по индексам двух символов '/' и '.'"""
-    
+ 
     for item in url:
         if '/' in url:
             index_1_count = url.index('/') + 2
             index_2_count = url.index('.')
             result_string = url[index_1_count:index_2_count]
-            return result_string
-           
-    """Получает срез из адреса по индексам символов '.'"""     
+            return(result_string)
     
-        elif '/' not in url:
+        else:
             index_1_count = url.index('.') + 1
             str = url[index_1_count:]
             index_2_count = str.index('.')
             result_string = str[:index_2_count]
-            return result_string
+            return(result_string)
