@@ -1,0 +1,26 @@
+import math
+
+def count_find_num(primesL, limit):
+
+    primesL_1 = []
+    primesL_2 = []
+    count = 0
+    result = []
+
+    for item in primesL:
+        count = 0
+        primesL_1 = []
+        for item_1 in range(0, len(primesL)):
+            primesL_1.append(primesL[item_1])
+        while count <= limit:
+            print(primesL_1)
+            #print(result)
+            count = math.prod(primesL_1)
+            primesL_1.append(primesL_1[primesL_1.index(item)])
+            if count > limit:
+                continue
+            else:
+                if count not in result:
+                    result.append(count)
+                    for item_1 in range(0, len(primesL)):
+                        primesL_2.append(primesL[item_1])
