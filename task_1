@@ -1,15 +1,7 @@
+import re
+mat = r'^(https?://)?(www\.)?([a-z-]*)\..+$'
+
 def domain_name(url):
- 
-    for item in url:
-        if '/' in url:
-            index_1_count = url.index('/') + 2
-            index_2_count = url.index('.')
-            result_string = url[index_1_count:index_2_count]
-            return(result_string)
-    
-        else:
-            index_1_count = url.index('.') + 1
-            str = url[index_1_count:]
-            index_2_count = str.index('.')
-            result_string = str[:index_2_count]
-            return(result_string)
+    print(url)
+    return re.match(mat, url).groups()[2]
+
