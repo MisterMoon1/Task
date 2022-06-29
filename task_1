@@ -1,7 +1,6 @@
 import re
-mat = r'^(https?://)?(www\.)?([a-z-]*)\..+$'
+
+mat = '(https?://)?(www\d?\.)?(?P<name>[\w-]+)\.'
 
 def domain_name(url):
-    print(url)
-    return re.match(mat, url).groups()[2]
-
+    return re.search(mat, url).group('name')
