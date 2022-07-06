@@ -1,0 +1,71 @@
+import itertools
+
+def split_coordinate(points_list):
+    result_list = []
+    list_xy = []
+    for item in points_list:
+        for item_1 in range(2):
+            value_list = list(list((sub[item_1] for sub in item)))
+            result_list.append(list(value_list))
+
+    while result_list:
+        list_xy.append(result_list[:2])
+        del result_list[:2]
+
+    return (list_xy)
+
+
+def sum_two_wais(list_point):
+    dict_result = {}
+    list_test = []
+    result = []
+    list_sum = []
+    control_dict = {}
+    count = len(list_point[0][0])
+    for item in list_point:
+        list_test.append(dict_result)
+        try:
+            for item_1 in range(count):
+                count_1 = (((item[0][item_1 + 1] - item[0][item_1]) ** 2) + (
+                        (item[1][item_1 + 1] - item[1][item_1]) ** 2)) ** 0.5
+                dict_result[f'({item[0][item_1]}, {item[1][item_1]})'] = count_1
+                result.append(count_1)
+        except IndexError:
+            pass
+
+    while result:
+        count_2 = 0
+        list_sum.append(sum(result[:count - 1]))
+        control_dict[sum(result[:count - 1])] = list_test[count_2]
+        count_2 += 1
+        del result[:count - 1]
+
+    return(control_dict)
+
+
+def sum_all_points(*points):
+    combination = combinations(points)
+    split_coordinate_list = split_coordinate(combination)
+    sum_result_dict = sum_two_wais(split_coordinate_list)
+    return(f'{(min(sum_result_dict))} = {sum_result_dict[(min(sum_result_dict))]}')
+
+
+def combinations(*points):
+    list_points = []
+    list_result = []
+    for point in points:
+        for point_11 in point:
+            list_points.append(list(point_11))
+    perm_set = itertools.permutations(list_points)
+    for i in perm_set:
+        list_result.append(list(i))
+
+    return (list(list_result))
+   
+point_1 = (0, 2)  # Почтовое отделение
+point_2 = (2, 5)  # Ул. Грибоедова, 104/25
+point_3 = (6, 16)  # Ул. Бейкер стрит, 221б
+point_4 = (8, 3)  # Ул. Большая Садовая, 302-бис
+point_5 = (5, 2)  # Вечнозелёная Аллея, 742
+
+print(sum_all_points(point_1, point_2, point_3, point_4, point_5))
