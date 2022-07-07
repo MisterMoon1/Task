@@ -1,5 +1,6 @@
 import itertools
 
+
 def split_coordinate(points_list):
     result_list = []
     list_xy = []
@@ -31,21 +32,24 @@ def sum_two_wais(list_point):
                 dict_result[f'({item[0][item_1]}, {item[1][item_1]})'] = count_1
                 result.append(count_1)
         except IndexError:
-            pass
+            count_2 = (((item[0][-1] - item[0][item_1-1]) ** 2) + (
+                        (item[1][-1] - item[1][item_1-1]) ** 2)) ** 0.5
+            dict_result[f'({item[0][item_1]}, {item[1][item_1]}) '] = count_2
+            result.append(count_2)
 
     while result:
-        count_2 = 0
-        list_sum.append(sum(result[:count - 1]))
-        control_dict[sum(result[:count - 1])] = list_test[count_2]
+        count_2 = 1
+        list_sum.append(sum(result[:count-1]))
+        control_dict[sum(result[:count-1])] = list_test[count_2]
         count_2 += 1
-        del result[:count - 1]
+        del result[:count-1]
 
     return(control_dict)
 
 
 def sum_all_points(*points):
-    combination = combinations(points)
-    split_coordinate_list = split_coordinate(combination)
+    combination = combinations(points) #list coordinats
+    split_coordinate_list = split_coordinate(combination) #list xy
     sum_result_dict = sum_two_wais(split_coordinate_list)
     return(f'{(min(sum_result_dict))} = {sum_result_dict[(min(sum_result_dict))]}')
 
@@ -60,7 +64,13 @@ def combinations(*points):
     for i in perm_set:
         list_result.append(list(i))
 
+    for item_3 in list_result:
+        item_3.append(list_points[0])
+
     return (list(list_result))
+
+
+print(sum_all_points(point_1, point_2, point_3, point_4, point_5))
    
 point_1 = (0, 2)  # Почтовое отделение
 point_2 = (2, 5)  # Ул. Грибоедова, 104/25
