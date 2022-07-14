@@ -1,0 +1,34 @@
+class CyclicIterator:
+    def __init__(self, range_1: int):
+        list_1 = []
+        self.list_1 = list_1
+        for i in range_1:
+            list_1.append(i)
+        self.current = -1
+        self.item = len(list_1)
+
+    def __iter__(self):
+        return RangeIterator(self)
+
+
+class RangeIterator:
+    def __init__(self, container):
+        self.container = container
+
+    def __next__(self):
+        try:
+            if self.container.current < self.container.item:
+                self.container.current += 1
+                return self.container.list_1[self.container.current]
+        except IndexError:
+            self.container.current = -1
+            if self.container.current < self.container.item:
+                self.container.current += 1
+                return self.container.list_1[self.container.current]
+
+        raise StopIteration
+
+x = [1,2,3,4,5]
+cyclic_iterator = CyclicIterator(x)
+for i in cyclic_iterator:
+    print(i)
