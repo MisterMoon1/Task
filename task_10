@@ -1,0 +1,19 @@
+dict_result = {}
+
+def decorator(func):
+    def deep_func(*args, **kwargs):
+        if args in dict_result:
+            return (dict_result[args])
+        else:
+            result = func(*args, **kwargs)
+            dict_result[args] = result
+            return (result)
+
+    return (deep_func)
+
+
+@decorator
+def multiplier(number: int):
+    return number * 2
+
+
